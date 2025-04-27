@@ -17,7 +17,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: "3.x"  # Use a more recent Python version
+          python-version: "3.x"
 
       - name: Install dependencies
         run: |
@@ -32,7 +32,6 @@ jobs:
 
       - name: Wait for server to be ready
         run: |
-          # Wait for the server to be fully up and running before starting tests
           for i in $(seq 1 10); do
             if curl --silent --fail http://localhost:8000 > /dev/null; then
               echo "Server is up!"
@@ -45,4 +44,4 @@ jobs:
 
       - name: Run tests
         run: |
-          pytest testAutomationPytest.py  # Run the tests
+          pytest path/to/your/testAutomationPytest.py  # Provide the correct relative path to the test file
