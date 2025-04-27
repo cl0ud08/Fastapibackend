@@ -42,7 +42,6 @@ jobs:
             fi
           done
 
-       - name: Run tests
-          run: |
-            pytest testAutomation.py  # Use the correct relative path
-        
+      - name: Run tests
+        run: |
+          pytest testAutomation.py  # Use the correct relative path
