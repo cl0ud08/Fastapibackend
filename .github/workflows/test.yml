@@ -17,7 +17,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: "3.10"
+          python-version: "3.x"
 
       - name: Install dependencies
         run: |
@@ -26,12 +26,22 @@ jobs:
 
       - name: Start FastAPI server
         run: |
-          nohup python apiserver.py &
+          nohup uvicorn apiserver:app --host 0.0.0.0 --port 8000 &  # Start FastAPI in the background
         env:
           PYTHONUNBUFFERED: 1
 
       - name: Wait for server to be ready
-        run: sleep 5
+        run: |
+          for i in $(seq 1 10); do
+            if curl --silent --fail http://localhost:8000 > /dev/null; then
+              echo "Server is up!"
+              break
+            else
+              echo "Waiting for server..."
+              sleep 5
+            fi
+          done
 
       - name: Run tests
-        run: pytest testAutomationPytest.py
+        run: |
+          pytest tests/testAutomationPytest.py  # Replace with the correct relative path
