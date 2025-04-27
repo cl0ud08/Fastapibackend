@@ -44,4 +44,4 @@ jobs:
 
       - name: Run tests
         run: |
-          pytest tests/testAutomationPytest.py  # Replace with the correct relative path
+          pytest tests/testAutomationPytest.py  # Correct relative path to the test file
